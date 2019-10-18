@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>写文章</title>
+    <%- include head %>
+</head>
+<body>
+    <%- include('bar',{username:docs.username}) %>
+    <div class="article">
+        <form action="/articles/write" method="post">
+            <input type="hidden" name="time" value="<%= docs.createTime %>">   
+            0
+            <input type="text" name="title" placeholder="请输入文章标题" value="<%= docs.title %>">
+            <textarea name="content" class="xheditor"><%- docs.content %></textarea>
+           <% if(docs.createTime){ %>
+                <input type="submit" value="修改">
+           <% }else{ %>
+                <input type="submit" value="发布">
+           <% } %>
+        </form>
+    </div>
+     <script src="/xheditor/jquery/jquery-1.4.4.min.js"></script>
+     <script src="/xheditor/xheditor-1.2.2.min.js"></script>
+     <script src="/xheditor/xheditor_lang/zh-cn.js"></script>
+     <script>
+        $('.xheditor').xheditor({
+            tools:'full',
+            skin:'default',
+            upImgUrl:'/articles/upload',
+            html5Upload:false,
+            upMultiple:5
+        })
+     </script>
+</body>
+</html>
